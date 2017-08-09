@@ -47,48 +47,45 @@ namespace sfinae
     };
 
     template <class Container, class T>
-    struct has_the_same_key_type
-        : std::is_same<typename Container::key_type, T> {
+    struct has_key_type : std::is_same<typename Container::key_type, T> {
     };
 
     template <class Container, class T>
-    struct has_the_same_value_type
-        : std::is_same<typename Container::value_type, T> {
+    struct has_value_type : std::is_same<typename Container::value_type, T> {
     };
 
     template <class Container, class T>
-    struct has_the_same_mapped_type
-        : std::is_same<typename Container::mapped_type, T> {
+    struct has_mapped_type : std::is_same<typename Container::mapped_type, T> {
     };
 
     template <class Container, class T>
-    struct has_the_same_key_or_value_type
-        : std::integral_constant<
-              bool, has_the_same_key_type<Container, T>::value ||
-                        has_the_same_value_type<Container, T>::value> {
+    struct has_key_or_value_type
+        : std::integral_constant<bool,
+                                 has_key_type<Container, T>::value ||
+                                     has_value_type<Container, T>::value> {
     };
 
     template <class Container, class T>
-    struct is_container_with_fixed_value_type
-        : std::integral_constant<
-              bool, is_container<Container>::value &&
-                        has_the_same_value_type<Container, T>::value> {
+    struct is_container_with_value_type
+        : std::integral_constant<bool,
+                                 is_container<Container>::value &&
+                                     has_value_type<Container, T>::value> {
     };
 
     template <class Container, class T>
-    struct is_container_with_fixed_type_and_find_method
+    struct is_container_with_find_method
         : std::integral_constant<
               bool, is_container<Container>::value &&
                         has_find_method<Container, T>::value &&
-                        has_the_same_key_or_value_type<Container, T>::value> {
+                        has_key_or_value_type<Container, T>::value> {
     };
 
     template <class Container, class Key, class Value>
-    struct is_map_container_with_fixed_type
-        : std::integral_constant<
-              bool, is_container<Container>::value &&
-                        has_find_method<Container, Key>::value &&
-                        has_the_same_key_type<Container, Key>::value &&
-                        has_the_same_mapped_type<Container, Value>::value> {
+    struct is_map_container_with_types
+        : std::integral_constant<bool,
+                                 is_container<Container>::value &&
+                                     has_find_method<Container, Key>::value &&
+                                     has_key_type<Container, Key>::value &&
+                                     has_mapped_type<Container, Value>::value> {
     };
 }

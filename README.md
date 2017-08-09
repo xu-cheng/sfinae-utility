@@ -10,13 +10,13 @@ The following SFINAE functions are provided:
 ```
 is_container<Container>
 has_find_method<Container, TypePassToFindMethod>
-has_the_same_key_type<Container, KeyType>
-has_the_same_value_type<Container, ValueType>
-has_the_same_mapped_type<Container, MappedType>
-has_the_same_key_or_value_type<Container, KeyOrValueType>
-is_container_with_fixed_value_type<Container, ValueType>
-is_container_with_fixed_type_and_find_method<Container, KeyOrValueType>
-is_map_container_with_fixed_type<Conainer, KeyType, MappedType>
+has_key_type<Container, KeyType>
+has_value_type<Container, ValueType>
+has_mapped_type<Container, MappedType>
+has_key_or_value_type<Container, KeyOrValueType>
+is_container_with_value_type<Container, ValueType>
+is_container_with_find_method<Container, KeyOrValueType>
+is_map_container_with_types<Conainer, KeyType, MappedType>
 ```
 
 ## Author
