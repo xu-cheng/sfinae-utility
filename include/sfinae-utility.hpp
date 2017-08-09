@@ -7,38 +7,43 @@ namespace sfinae
 {
     // Ref: https://stackoverflow.com/a/31207079
 
-    template <typename... Ts>
-    struct _helper {
-    };
+    namespace detail
+    {
+        template <typename... Ts>
+        struct helper {
+        };
+    }
 
     template <class Container, class = void>
     struct is_container : std::false_type {
     };
     template <class Container>
-    struct is_container<Container,
-                        typename std::conditional<
-                            false,
-                            _helper<typename Container::value_type,
-                                    typename Container::size_type,
-                                    typename Container::allocator_type,
-                                    typename Container::iterator,
-                                    typename Container::const_iterator,
-                                    decltype(std::declval<Container>().size()),
-                                    decltype(std::declval<Container>().begin()),
-                                    decltype(std::declval<Container>().end())>,
-                            void>::type> : std::true_type {
+    struct is_container<
+        Container,
+        typename std::conditional<
+            false,
+            detail::helper<typename Container::value_type,
+                           typename Container::size_type,
+                           typename Container::allocator_type,
+                           typename Container::iterator,
+                           typename Container::const_iterator,
+                           decltype(std::declval<Container>().size()),
+                           decltype(std::declval<Container>().begin()),
+                           decltype(std::declval<Container>().end())>,
+            void>::type> : std::true_type {
     };
 
     template <class Container, class T, class = void>
     struct has_find_method : std::false_type {
     };
     template <class Container, class T>
-    struct has_find_method<Container, T,
-                           typename std::conditional<
-                               false,
-                               _helper<decltype(std::declval<Container>().find(
-                                   std::declval<T>()))>,
-                               void>::type> : std::true_type {
+    struct has_find_method<
+        Container, T,
+        typename std::conditional<
+            false,
+            detail::helper<decltype(
+                std::declval<Container>().find(std::declval<T>()))>,
+            void>::type> : std::true_type {
     };
 
     template <class Container, class T>
