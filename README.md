@@ -19,6 +19,8 @@ is_container_with_find_method<Container, KeyOrValueType>
 is_map_container_with_types<Conainer, KeyType, MappedType>
 ```
 
+For each of these functions, there is a helper variable template whose name has a suffix `_v`. For example, `is_container_v<Container>` is equivalent to `is_container<Container>::value`.
+
 ## Functions
 
 * `is_container<Container>`
