@@ -19,6 +19,44 @@ is_container_with_find_method<Container, KeyOrValueType>
 is_map_container_with_types<Conainer, KeyType, MappedType>
 ```
 
+## Functions
+
+* `is_container<Container>`
+
+Return true if the input is a STL-like container. Specially, it checks whether `Container` has certain member types (`value_type`, `size_type`, `allocator_type`, `iterator` and `const_iterator`) and accepts certain methods (`size()`, `begin()` and `end()`).
+
+* `has_find_method<Container, TypePassToFindMethod>`
+
+Return true if the container accepts `find(TypePassToFindMethod)` method.
+
+* `has_key_type<Container, KeyType>`
+
+Return true if the `Container::key_type` is `KeyType`.
+
+* `has_value_type<Container, ValueType>`
+
+Return true if the `Container::value_type` is `ValueType`.
+
+* `has_mapped_type<Container, MappedType>`
+
+Return true if the `Container::mapped_type` is `MappedType`.
+
+* `has_key_or_value_type<Container, KeyOrValueType>`
+
+Return true if the input has `KeyOrValueType` as `Container::key_type` or `Container::value_type`.
+
+* `is_container_with_value_type<Container, ValueType>`
+
+Return true if the input is a STL-like container and has `ValueType` as `Container::value_type`.
+
+* `is_container_with_find_method<Container, KeyOrValueType>`
+
+Return true if the input is a STL-like container, has `KeyOrValueType` as `Container::key_type` or `Container::value_type`, and accepts `find(KeyOrValueType)` method. This is useful to check whether the input is a `std::set` or `std::map` like container.
+
+* `is_map_container_with_types<Conainer, KeyType, MappedType>`
+
+Return true if the input is a STL-like map container and has `KeyType` as `Container::key_type` and `MappedType` as `Container::mapped_type`.
+
 ## Author
 
 * [Xu Cheng](https://xuc.me)
