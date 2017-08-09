@@ -5,7 +5,7 @@
 
 namespace sfinae
 {
-    // Ref: http://stackoverflow.com/a/31207079
+    // Ref: https://stackoverflow.com/a/31207079
 
     template <typename... Ts>
     struct _helper {
